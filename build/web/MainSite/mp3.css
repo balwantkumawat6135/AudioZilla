@@ -1,0 +1,43 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 8, 2025, 1:26:16 PM
+    Author     : balwant-kumawat
+*/
+.txt{
+                font-family: "Kanit", sans-serif;
+                font-weight: 500;
+                font-style: normal;
+                font-size: 20px;
+            }
+            .clamp-text {
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            a{
+                color:black;
+            }
+            a:hover{
+                color:red;
+                text-decoration:none;
+            }
+            .img-wrapper {
+                overflow: hidden;
+            }
+            .img-wrapper:hover {
+                border: 4px solid red; border-radius: 8px;
+            }
+
+            .inner-img {
+                transition: 0.3s;
+            }
+
+            .inner-img:hover {
+                transform: scale(1.1);
+            }
+            
