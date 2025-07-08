@@ -19,7 +19,7 @@
         }
         if(email!=null && session.getAttribute(email)!=null){
                 String code="";
-                if(request.getParameter("scode").trim().length()>0 && request.getParameter("scode")!=null && request.getParameter("code").trim().length()>0 && request.getParameter("code")!=null && request.getParameter("sname").trim().length()>0 && request.getParameter("sname")!=null && request.getParameter("aname").trim().length()>0 && request.getParameter("aname")!=null && request.getParameter("des").trim().length()>0 && request.getParameter("des")!=null ){
+                if(request.getParameter("scode").trim().length()>0 && request.getParameter("scode")!=null && request.getParameter("code").trim().length()>0 && request.getParameter("code")!=null && request.getParameter("sname").trim().length()>0 && request.getParameter("sname")!=null  && request.getParameter("des").trim().length()>0 && request.getParameter("des")!=null ){
                     try{
                          String sn=request.getParameter("scode").trim();
                          code=request.getParameter("code").trim();
@@ -27,7 +27,7 @@
                          String des=request.getParameter("des").trim();
                          Class.forName("com.mysql.jdbc.Driver");
                          Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/mp3","root","");
-                         PreparedStatement ps=cn.prepareStatement("update song set name=?,des=? where sn=?");
+                         PreparedStatement ps=cn.prepareStatement("update songs set sname=?,des=? where sn=?");
                          ps.setString(1, sname);
                          ps.setString(2, des);
                          ps.setString(3, sn);

@@ -28,14 +28,14 @@
                     Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mp3", "root", "");
                     Statement st=cn.createStatement();
                     int count=0;
-                    ResultSet rs=st.executeQuery("select sn from song where album='"+code+"'");
+                    ResultSet rs=st.executeQuery("select sn from songs where album='"+code+"'");
                     while(rs.next()){
                             count=1;
                             File fr=new File(path+"/album/"+code+"/"+rs.getInt(1)+".mp3");
                             if(fr.delete());
                         }
                     if(count==1){
-                    PreparedStatement ps1= cn.prepareStatement("delete from song where album=?");
+                    PreparedStatement ps1= cn.prepareStatement("delete from songs where album=?");
                     ps1.setString(1,code); 
                     if(ps1.executeUpdate()>0){
                         PreparedStatement ps= cn.prepareStatement("delete from album where code=?");

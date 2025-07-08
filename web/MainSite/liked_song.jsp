@@ -25,7 +25,6 @@
                 max_sn = rs5.getInt(1);
             }
             int v = (int) (Math.random() * 101);
-            out.print(max_sn);
 %>
 <!DOCTYPE html>
 <html>
@@ -44,7 +43,6 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
         <script>
             var max_sn =<%=max_sn%>;
-            alert(max_sn);
         </script>
         <script src="ad.js?v=<%=v%>"></script>
         <style>
@@ -107,6 +105,41 @@
                 font-weight: 900;
                 font-size: 48px; /* optional, adjust as needed */
             }
+            #cover {
+                background: transparent; /* Modern gradient */
+                border-radius: 20px; /* 50px is often too much, 20px is smoother */
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+                padding: 20px; /* Inner spacing */
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            #cover:hover {
+                transform: translateY(-5px); /* Slight hover lift */
+                box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25); /* Deeper shadow on hover */
+            }
+            .audio-player{
+                display:none;
+            }
+            .atitle{
+                text-align:center;
+                padding-top: 100px;
+                font-weight:800;
+                font-size:70px;
+                /* background-color: #2f8d46;*/
+                background-image: url("Image/g.jpeg");
+                background-repeat: repeat;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-transform: uppercase;
+                font-family: 'Steelfish Rg', 'helvetica neue',helvetica, arial, sans-serif;
+                -webkit-font-smoothing: antialiased;
+                text-shadow:
+                    10px 3px 0 rgba(0, 0, 0, 0.2),
+                    4px 5px 6px rgba(0, 0, 0, 0.15),
+                    6px 8px 10px rgba(0, 0, 0, 0.1);
+                -moz-osx-font-smoothing: grayscale;
+                margin-left: -200px;
+            }
         </style>
     </head>
     <body class="scrh">
@@ -115,20 +148,19 @@
         <div class="container-fluid" style="margin-bottom: 100px;">
             <div class="row " >
                 <div class="col-lg-1 col-md-1 d-none d-md-block"></div>
-                <div class="col-lg-10 col-md-10 col-sm-12 col-12" >
+                <div class="col-lg-10 col-md-10 col-sm-12 col-12" id="cover" >
                     <div class="row">
                         <div class="col-lg-12" >
                             <div class="row">
-                                <div class="col-lg-1 mt-4 col-md-1 col-sm-1 col-1"></div>
-                                <div class="col-lg-3 mt-4 col-md-3 col-sm-3 col-3">
+                                <div class="col-lg-4 mt-4 col-md-4 col-sm-4 col-4">
                                     <img src="Image/liked_song.jpeg" class="img-fluid">
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8 col-8 mt-4 align-items-center">
-                                    <h class="liked-text">Liked Songs</h1>
+                                    <h1 class="atitle">Liked Songs</h1>
                                 </div>
                                 <div class="col-lg-12 mt-4">
                                     <table class="table table-hover" p_flag="1">
-                                        <thead class="thead-light">
+                                        <thead class="bg-dark text-white">
                                             <tr>
                                                 <th></th>
                                                 <th>Name</th>
@@ -163,7 +195,7 @@
                                                             p0.setString(1, co);
                                                             ResultSet r = p0.executeQuery();
                                                             if (r.next()) {
-                                                                String a = "<a href='artist.jsp?code=" + r.getString(2) + "'>" + r.getString(3) + "</a>";
+                                                                String a = "<a href='view_artist.jsp?code=" + r.getString(2) + "'>" + r.getString(3) + "</a>";
                                                                 aname += a + " ";
 
                                                             }
@@ -173,7 +205,7 @@
                                                         p0.setString(1, acode);
                                                         ResultSet r = p0.executeQuery();
                                                         if (r.next()) {
-                                                            aname = "<a href='artist.jsp?code=" + r.getString(2) + "'>" + r.getString(3) + "</a>";
+                                                            aname = "<a href='view_artist.jsp?code=" + r.getString(2) + "'>" + r.getString(3) + "</a>";
                                                         }
                                                     }
 

@@ -20,10 +20,10 @@
                 flag = 1;
             }
         }
-
         if (flag == 1) {
             artist = acode + "," + artist; // append comma and new artist
         }
+        
         PreparedStatement p = cn.prepareStatement("update songs set aname=? where sn=?");
         p.setString(1, artist);
         p.setInt(2, sn);

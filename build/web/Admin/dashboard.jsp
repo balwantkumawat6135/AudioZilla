@@ -44,6 +44,12 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <!-- End layout styles -->
         <link rel="shortcut icon" href="assets/images/favicon.png" />
+        <style>
+            .input:focus{
+                background-color:white;
+                color: black;
+            }
+        </style>
     </head>
     <body>
 
@@ -438,7 +444,7 @@
                                     </div>
                                     <div class="card-body">
                                         <form method="post" action="add_category.jsp">
-                                            <input type="text" name="category" class="form-control" placeholder="Category Name" required><br><br>
+                                            <input type="text" name="category" class="form-control input" placeholder="Category Name" required><br><br>
                                             <button type="submit" class="btn btn-success  px-4">+Add</button>
                                         </form>
                                     </div>

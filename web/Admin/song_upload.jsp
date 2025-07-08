@@ -416,8 +416,8 @@
                       %>
                       <div class="card-body">
                           <form action="upload_song.jsp?code=<%=code%>&sn=<%=sn%>" method="post" enctype="multipart/form-data">
-                                <input type="file" name="mp3File" accept="audio/mp3" class="form-control" required>
-                                <button type="submit">Upload</button>
+                              <input type="file" name="mp3File" accept="audio/mp3"  required><br><br>
+                                <button type="submit" class="btn btn-outline-success">Upload</button>
                             </form>
                       </div>
                   </div>

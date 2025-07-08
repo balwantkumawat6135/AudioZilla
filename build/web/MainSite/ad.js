@@ -55,26 +55,38 @@ $(document).on("click", ".playlist", function () {
    }
 });
 
-$(document).on("click", "#ad-playlist", function () {
-   var pname = $("#pname").val();
-   var email=$("#pname").attr("email");
-   $.post(
-           "add_playlist.jsp",{email:email,pname:pname},function(data){
-                data=data.trim();
-                if(data=='success'){
-                    $(".close").click();
-                    toastr.success('Playlist Created', 'Success');
-                    
-                }
-            
-           }
-       );
+$(document).on("click", ".add_pname", function () {
+    var num=$(this).data("sn");
+    var pname = $("#pname-"+num).val();
+    var email = $("#pname-"+num).attr("email");
+
+    if (!pname) {
+        toastr.warning('Playlist name cannot be empty.', 'Warning');
+        return;
+    }
+
+    $.post("add_playlist.jsp", { email: email, pname: pname })
+        .done(function (data) {
+            if (data.trim() === 'success') {
+                toastr.success('Playlist Created', 'Success');
+                $(".p-field").val('');
+                location.reload();
+            } else {
+                toastr.error(data, 'Error'); // server response other than 'success'
+            }
+        })
+        .fail(function () {
+            toastr.error('Server error. Please try again.', 'Error');
+        });
 });
+
+
 $(document).on("change",".p-select",function(){
     var email= $(this).attr("email");
     var acode= $(this).attr("acode");
     var sn= $(this).attr("sn");
     var pcode=$(this).val();
+    console.log(email+" "+acode+" "+sn+" "+pcode);
     $.post(
             "ad_song_playlist.jsp",{email:email,acode:acode,sn:sn,pcode:pcode},function(data){
                     data=data.trim();
@@ -98,6 +110,7 @@ var tdno = 0;
                 p_flag=$(".table").attr("p_flag");
             });
             $(document).on("click", ".song", function () {
+                $(".audio-player").show();
                 for(var i=1;i<=max_sn;i++){
                     $("#td-" + i).html(i);
                 }
@@ -253,6 +266,7 @@ var tdno = 0;
                 var $this = $(this);
 
                 if (email.length < 1) {
+                    toastr.error('Please Sign In', 'Error');
                     $('#lModal').modal('show');
                 } else {
                     $.post(

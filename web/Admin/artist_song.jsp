@@ -479,7 +479,7 @@
                                       Class.forName("com.mysql.jdbc.Driver");
                                       Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/mp3","root","");
                                       Statement st=cn.createStatement();
-                                      ResultSet rs=st.executeQuery("select * from songs where aname NOT LIKE '%"+ code +"%'");
+                                      ResultSet rs=st.executeQuery("select * from songs where aname NOT LIKE '%"+ code +"%' OR aname IS NULL");
                                       while(rs.next()){
                                           String album=rs.getString(5);
                                   %>

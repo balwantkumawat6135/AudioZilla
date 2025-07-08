@@ -52,7 +52,7 @@
             .d1, .d2 {
                 max-height: 70vh;
                 overflow-y: scroll;
-                border: 1px solid #ccc;
+                border: 1px solid #000;
             }
 
             @media (min-width: 992px) {
@@ -65,7 +65,7 @@
                     height: 50vh; /* fixed height on larger screens */
                 }
             }
-                    .song{
+            .song{
                 cursor:pointer;
             }
             .audio-player {
@@ -101,11 +101,26 @@
                 font-weight:800;
                 font-family:kanit;
             }
-    
+            .audio-player{
+                display:none;
+            }
+            .song-card {
+                background-color: #fff;
+                border-radius: 12px;
+                transition: box-shadow 0.3s ease, transform 0.3s ease;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            }
+
+            .song-card:hover {
+  border: 3px solid black; /* Bootstrap primary color */
+}
+
+
         </style>
         <script>
             $(document).ready(function () {
                 $("#search").attr("id", "searchb");
+                $("#searchb").focus();
             });
             $(document).on("keyup", "#searchb", function () {
                 var txt = $(this).val();
@@ -118,24 +133,25 @@
             var tdno = 0;
             var sn = 0;
             var album = "";
-            var p_flag=0;
+            var p_flag = 0;
             $(document).on("click", ".song", function () {
+                $(".audio-player").show();
                 sn = parseInt($(this).attr("rel"));
-                img=$(this).attr("img");
+                img = $(this).attr("img");
                 var path = $(this).attr("name"); // Get the path from "name" attribute
                 var title = $(this).attr("sname");
-               // var artist = $(this).attr("artist");
+                // var artist = $(this).attr("artist");
                 $("#SongImg").attr("src", img);
                 $("#audioPlayer source").attr("src", path); // Set as audio source
                 $("#audioPlayer")[0].load(); // Reload the audio player
                 $("#audioPlayer")[0].play(); // Play the song
                 $("#playPauseIcon").removeClass("fa-play").addClass("fa-pause"); // Update icon
                 $("#trackTitle").html(title);
-               // $("#trackArtist").html(artist);
+                // $("#trackArtist").html(artist);
                 //$("#title").html(album + ":" + title);
                 //$("#td-" + sn).html("<img src='Image/songplay.gif'  style='width:48px;height:48px;background:none;'>")
             });
-                        $(document).on("click", "#playPauseIcon", function () {
+            $(document).on("click", "#playPauseIcon", function () {
                 var audio = $("#audioPlayer")[0];
                 var cls = $(this).attr("class");
                 if (cls == 'fa fa-pause') {
@@ -178,50 +194,56 @@
             });
 
 
-            
+
         </script>
     </head>
     <html>
         <body>
             <%@include file="nav.jsp" %>
-            <div class="container-fluid srh" style="margin-bottom: 100px;">
-
-            </div>
-            <div class="audio-player">
-            <nav class="navbar bg-light  fixed-bottom p-0">
-                <!-- Progress bar on top -->
-                <input type="range" id="progressBar" style="color:red;" class="form-control-range w-100 m-0" value="0" max="100">
-
-                <div class="container-fluid py-2">
-                    <div class="row w-100 align-items-center">
-                        <!-- Left section: Album art and track info -->
-                        <div class="col-4 d-flex align-items-center">
-                            <img src="" class="rounded mr-3" id="SongImg" style="width: 50px; height: 50px;">
-                            <div>
-                                <h6 id="trackTitle" class="mb-1"></h6>
-                                <small id="trackArtist"></small>
-                            </div>
-                        </div>
-
-                        <!-- Center section: Control buttons -->
-                        <div class="col-4 d-flex justify-content-center">
-                            <button  class="clr"><i class="fa fa-step-backward "></i></button>
-                            <button  class="clr"><i class="fa fa-play " id="playPauseIcon"></i></button>
-                            <button  class="clr"><i class="fa fa-step-forward"></i></button>
-                        </div>
-
-                        <!-- Right section: Time info -->
-                        <div class="col-4 text-right">
-                            <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
-                        </div>
+            <div class="container-fluid srh bg-light  shadow-sm" style="margin-bottom: 100px; border-radius: 10px;height: 80vh;">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 text-center" style="margin-top: 18%;">
+                        <h1 class="font-weight-bold text-dark mb-3">🎵 Search Music</h1>
+                        <p class="text-muted lead">Find your favorite songs, albums, and artists instantly</p>
                     </div>
                 </div>
+            </div>
 
-                <audio id="audioPlayer">
-                    <source src="" type="audio/mpeg">
-                </audio>
-            </nav>
-        </div>
+            <div class="audio-player">
+                <nav class="navbar bg-light  fixed-bottom p-0">
+                    <!-- Progress bar on top -->
+                    <input type="range" id="progressBar" style="color:red;" class="form-control-range w-100 m-0" value="0" max="100">
+
+                    <div class="container-fluid py-2">
+                        <div class="row w-100 align-items-center">
+                            <!-- Left section: Album art and track info -->
+                            <div class="col-4 d-flex align-items-center">
+                                <img src="" class="rounded mr-3" id="SongImg" style="width: 50px; height: 50px;">
+                                <div>
+                                    <h6 id="trackTitle" class="mb-1"></h6>
+                                    <small id="trackArtist"></small>
+                                </div>
+                            </div>
+
+                            <!-- Center section: Control buttons -->
+                            <div class="col-4 d-flex justify-content-center">
+                                <button  class="clr"><i class="fa fa-step-backward "></i></button>
+                                <button  class="clr"><i class="fa fa-play " id="playPauseIcon"></i></button>
+                                <button  class="clr"><i class="fa fa-step-forward"></i></button>
+                            </div>
+
+                            <!-- Right section: Time info -->
+                            <div class="col-4 text-right">
+                                <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <audio id="audioPlayer">
+                        <source src="" type="audio/mpeg">
+                    </audio>
+                </nav>
+            </div>
         </body>
     </html>
 

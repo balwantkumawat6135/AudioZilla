@@ -29,12 +29,13 @@
                     Connection cn=DriverManager.getConnection("jdbc:mysql://localhost:3306/mp3","root","");
                     Statement st=cn.createStatement();
                     ResultSet rs=st.executeQuery("select MAX(sn) from songs");
+                        String a_name="";
                         int sn=0; 
                         if(rs.next()){
                             sn = rs.getInt(1);
                         }
                         sn++;
-                    if(st.executeUpdate("insert into songs values("+sn+",'"+ sname +"',NULL,'"+ des +"','"+ albcode +"')")>0){
+                    if(st.executeUpdate("insert into songs values("+sn+",'"+ sname +"','"+a_name+"','"+ des +"','"+ albcode +"')")>0){
                         response.sendRedirect("song_upload.jsp?success=1&code="+albcode+"&sn="+ sn +"");
                     }
                     else{

@@ -34,41 +34,43 @@
 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="mp3.css">
+        <link rel="stylesheet" href="mp3.css?v=2">
         <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     </head>
     <body class="scrh">
         <%@include file="nav.jsp"%>
-        <div id="demo" class="carousel slide" data-ride="carousel">
+        <div class="container-fluid">
+            <div id="demo" class="carousel slide" data-ride="carousel">
 
-            <!-- The slideshow -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="Image/2.jpg" class="img-fluid" alt="Los Angeles" >
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item  active">
+                        <img src="Image/2.jpg" class="c_img" alt="Los Angeles" >
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Image/3.jpg" class="c_img" alt="Chicago" >
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Image/4.jpg" class="c_img" alt="New York" >
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Image/5.png" class="c_img" alt="New York" >
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Image/6.jpeg" class="c_img" alt="New York" >
+                    </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="Image/3.jpg" class="img-fluid" alt="Chicago" >
-                </div>
-                <div class="carousel-item">
-                    <img src="Image/4.jpg" class="img-fluid" alt="New York" >
-                </div>
-                <div class="carousel-item">
-                    <img src="Image/5.png" class="img-fluid" alt="New York" >
-                </div>
-                <div class="carousel-item">
-                    <img src="Image/6.jpeg" class="img-fluid" alt="New York" >
-                </div>
+
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
             </div>
 
-            <!-- Left and right controls -->
-            <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a class="carousel-control-next" href="#demo" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </a>
         </div>
-
 
         <div class="container-fluid my-4">
             <div class="row m-4">
@@ -77,8 +79,8 @@
                         String catcode = cat.getString(2);
                 %>
                 <div class="col-lg-12 col-sm-12 col-md-12 col-12 mt-4" style="border-radius: 15px 15px 0 0;">
-                    <h3 style="float:left;"><%=cat.getString(3)%></h3>
-                    <a href="more.jsp?id=<%=catcode%>"><p style="float:right;color:red" class="pt-2 pr-2" >More</p></a>
+                    <h3 style="float:left;" class="heading"><%=cat.getString(3)%></h3>
+                    <a href="more.jsp?id=<%=catcode%>"><button  class="btn  heading-btn" >More</button></a>
                 </div>
                 <div class="col-lg-12 col-sm-12 col-md-12 col-12">
                     <div class="row">
@@ -93,10 +95,10 @@
 
                         %>
                         <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                                <div>
-                                    <div class="img-wrapper" border="1">
-                                        <a href="view_album.jsp?code=<%=code%>&Album=<%=Name1%>"><img src="../album/<%=code%>/<%=code%>.jpg" alt="img" class="img-fluid  inner-img"></a>
-                                    </div>
+                            <div>
+                                <div class="img-wrapper" border="1">
+                                    <a href="view_album.jsp?code=<%=code%>&Album=<%=Name1%>"><img src="../album/<%=code%>/<%=code%>.jpg" alt="img" class="img-fluid  inner-img"></a>
+                                </div>
                                 <div>
                                     <a href="view_album.jsp?code=<%=code%>&Album=<%=Name1%>"><h6 style="text-align:center" class="txt clamp"><%=rs1.getString(3)%></h6></a>
                                 </div>
@@ -112,8 +114,8 @@
                     }
                 %>
                 <div class="col-lg-12 col-sm-12 col-md-12 col-12 mt-4" style="border-radius: 15px 15px 0 0;">
-                    <h3 style="float:left;">Artists</h3>
-                    <a href="more.jsp?id="><p style="float:right;color:red" class="pt-2 pr-2" >More</p></a>
+                    <h3 style="float:left;" class="heading">Artists</h3>
+                    <a href="artists.jsp"><button  class="btn  heading-btn" >More</button></a>
                 </div>
                 <div class="col-lg-12 col-sm-12 col-md-12 col-12">
                     <div class="row">
@@ -128,8 +130,8 @@
                         %>
                         <div class="col-lg-2 col-md-3 col-sm-4 col-6">
                             <div>
-                                <div>
-                                    <a href="view_artist.jsp?code=<%=code%>"><img src="../artist/<%=code%>/<%=code%>.jpg" alt="img" class="img-fluid rounded-circle img-thumbnail"></a>
+                                <div class="img-wrapper" style="border-radius:50%;">
+                                    <a href="view_artist.jsp?code=<%=code%>"><img src="../artist/<%=code%>/<%=code%>.jpg" alt="img" class="img-fluid rounded-circle img-thumbnail inner-img"></a>
                                 </div>
                                 <div>
                                     <a href="view_artist.jsp?code=<%=code%>"><h6 style="text-align:center" class="txt clamp"><%=rs1.getString(3)%></h6></a>
@@ -146,6 +148,7 @@
 
 
     </body>
+    <%@include file="footer.jsp" %>
 </html>
 <%
     } catch (Exception e) {

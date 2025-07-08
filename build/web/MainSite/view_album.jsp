@@ -41,6 +41,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="mp3.css">
         <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
@@ -96,7 +97,26 @@
             .clr:hover{
                 color:red;
             }
-           
+            #cover {
+                background: transparent; /* Modern gradient */
+                border-radius: 20px; /* 50px is often too much, 20px is smoother */
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+                padding: 20px; /* Inner spacing */
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+                #cover:hover {
+                    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25); /* Deeper shadow on hover */
+                }
+                .audio-player{
+                    display:none;
+                }
+                .phead{
+                text-align:center;
+                font-weight:900;
+                font-size:22px;
+            }
+     
         </style>
 
         <script>
@@ -108,15 +128,15 @@
     <body class="scrh">
         <%@include file="nav.jsp" %>
         <div class="container" style="margin-bottom: 100px;">
-            <div class="row ">
+            <div class="row mt-4" id="cover">
                 <%                    ResultSet rs2 = st.executeQuery("select * from album where code='" + album + "'");
                     if (rs2.next()) {
                 %>
-                <div class="col-lg-3 mt-4 col-md-3 col-sm-3 col-3">
+                <div class="col-lg-3 mt-4 col-md-12 col-sm-12 col-12">
                     <img src="../album/<%=rs2.getString(2)%>/<%=rs2.getString(2)%>.jpg" class="img-fluid">
                 </div>
 
-                <div class="col-lg-9 col-md-9 col-sm-9 col-9 mt-4 align-items-center">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-12 mt-4 align-items-center">
                     <h1><%=rs2.getString(3)%></h1>
                     <p style="font-size:20px;"><%=rs2.getString(4)%></p>
                 </div>
@@ -124,7 +144,7 @@
                     }
                 %>
 
-                <div class="col-lg-12 mt-4">
+                <div class="col-lg-12 mt-4" id="load-song">
                     <table class="table  " p_flag="0">
                         <thead class="thead-dark">
                             <tr>
@@ -204,32 +224,32 @@
 
                                                 <!-- Modal Header -->
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">Playlist</h4>
+                                                    <h4 class="modal-title" style="text-align:center;">Playlist</h4>
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
 
                                                 <!-- Modal body -->
                                                 <div class="modal-body bg-light">
-                                                    <div class="row">
+                                                    <div class="row" id="reload">
                                                         <div class="col-lg-12 ">
                                                             <div class="row">
-                                                                <div class="col-lg-2"></div>
-                                                                <div class="col-lg-8">
-                                                                    <label>Create Playlist</label><br>
-                                                                    <input type="text" id="pname" palceholder="Enter Playlist Name"   class="form-control">
-                                                                    <button class="btn btn-outline-success mt-2" id="ad-playlist">Create</button><br><br>
+                                                                <div class="col-lg-1"></div>
+                                                                <div class="col-lg-10">
+                                                                    <h6 class="phead">Create Playlist</h6><br>
+                                                                    <input type="text" id="pname-<%=sn%>" placeholder="Enter Playlist Name"   class="form-control p-field" email="<%=email%>">
+                                                                    <button class="btn btn-outline-success add_pname mt-2" data-sn="<%=sn%>" >Create</button><br><br>
 
                                                                 </div>
-                                                                <div class="col-lg-2"></div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <hr>
                                                         </div>
                                                         <div class="col-lg-1"></div>
-                                                        <div class="col-lg-10" id="reload">
-                                                            <h6>Playlists</h6><br>
+                                                        <div class="col-lg-10">
+                                                            <h6 class="phead">Playlists</h6><br>
                                                             <select name="Playlist" class="form-control p-select" email="<%=email%>" acode="<%=rs12.getString(5)%>" sn="<%=rs12.getInt(1)%>">
+                                                                <option selected disabled>Select a Playlist</option>
                                                                 <%
                                                                     PreparedStatement ps0 = cn.prepareStatement("select * from playlist where email=?");
                                                                     ps0.setString(1, email);
@@ -295,6 +315,7 @@
             </nav>
         </div>
     </body>
+    <%@include file="footer.jsp" %>
 </html>
 <%
         } catch (Exception e) {

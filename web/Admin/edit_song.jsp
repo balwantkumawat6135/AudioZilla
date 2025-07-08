@@ -405,7 +405,7 @@
                                             Class.forName("com.mysql.jdbc.Driver");
                                             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mp3", "root", "");
                                             Statement st = cn.createStatement();
-                                            ResultSet rs = st.executeQuery("select * from song where sn='" + sn + "'");
+                                            ResultSet rs = st.executeQuery("select * from songs where sn='" + sn + "'");
                                             if (rs.next()) {
                                     %>
                                     <div class="card-body">

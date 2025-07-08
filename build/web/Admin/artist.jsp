@@ -73,6 +73,9 @@
             input[type=text] {
                 color: white;
             }
+            tr td,thead tr td{
+                color:white;
+            }
         </style>
     </head>
     <body>
@@ -444,9 +447,9 @@
                             </div>
                             <div class="col-lg-2"></div>  
                             <div class="col-lg-12 mt-4">
-                                <table class="table">                      
+                                <table class="table table-borderless">                      
                                     <tr>
-                                        <td>Image</td><td>Name</td><td>No of Songs</td><td></td><td></td>
+                                        <td>Image</td><td>Name</td><td>No of Songs</td><td></td><td></td><td></td>
                                     </tr>
                                     <%
                                         try {
@@ -459,7 +462,7 @@
                                     %>
                                     <tr>
                                         <td>
-                                            <img src="<%=request.getContextPath()%>/artist/<%=rs.getString(2)%>/<%=rs.getString(2)%>.jpg" style="width:100px;height:auto;border-radius:0%;">
+                                            <img src="<%=request.getContextPath()%>/artist/<%=rs.getString(2)%>/<%=rs.getString(2)%>.jpg" style="width:100px;height:auto;border-radius:50%;">
                                         </td>
                                         <td><%=rs.getString(3)%></td>
                                         <%

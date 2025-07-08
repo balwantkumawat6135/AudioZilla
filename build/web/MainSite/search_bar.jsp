@@ -19,9 +19,11 @@
         <div class="row">
             <div class="col-lg-12 ht"><h2>Songs</h2></div>
             <%
+                int c1 = 0;
                 while (rs.next()) {
+                    c1++;
             %>
-            <div class="col-lg-12 mt-1 card song" rel="<%=rs.getInt(1)%>" name="../album/<%=rs.getString(5)%>/<%=rs.getString(1)%>.mp3" img="../album/<%=rs.getString(5)%>/<%=rs.getString(5)%>.jpg" sname="<%=rs.getString(2)%>">
+            <div class="col-lg-12 mt-1 card song song-card" rel="<%=rs.getInt(1)%>" name="../album/<%=rs.getString(5)%>/<%=rs.getString(1)%>.mp3" img="../album/<%=rs.getString(5)%>/<%=rs.getString(5)%>.jpg" sname="<%=rs.getString(2)%>">
                 <div class="row">
                     <div class="col-lg-2 my-2 col-md-2 col-sm-2 col-2">
                         <img src="../album/<%=rs.getString(5)%>/<%=rs.getString(5)%>.jpg" style="width:100px;height:100px;">
@@ -31,6 +33,15 @@
                     </div>
                 </div>
             </div>
+            <%
+                }
+                if (c1 == 0) {
+            %>
+            <div class="col-lg-12 text-center my-5">
+                <h2 class="text-dark font-weight-bold mb-3">No Songs Found</h2>
+                <p class="text-muted">Sorry, we couldn’t find anything matching your search.<br>Try different keywords.</p>
+            </div>
+
             <%
                 }
             %>
@@ -44,7 +55,9 @@
                 PreparedStatement p = cn.prepareStatement("select * from artist where artist LIKE ?");
                 p.setString(1, "%" + text + "%");
                 ResultSet r = p.executeQuery();
+                int c2 = 0;
                 while (r.next()) {
+                    c2++;
             %>
             <div class="col-lg-2 my-2 col-md-2 col-sm-2 col-2">
                 <a href="view_artist.jsp?code=<%=r.getString(2)%>"><img src="../artist/<%=r.getString(2)%>/<%=r.getString(2)%>.jpg" class="rounded-circle" style="width:100px;height: 100px;"></a>
@@ -54,7 +67,15 @@
             </div>
             <%
                 }
+                if (c2 == 0) {
+            %>
+            <div class="col-lg-12 text-center my-5">
+                <h2 class="text-dark font-weight-bold mb-3">No Artist Found</h2>
+                <p class="text-muted">Sorry, we couldn’t find anything matching your search.<br>Try different keywords.</p>
+            </div>
 
+            <%
+                }
             %>
         </div>
     </div>
@@ -64,7 +85,9 @@
             <%                     PreparedStatement p0 = cn.prepareStatement("select * from album where album LIKE ?");
                 p0.setString(1, "%" + text + "%");
                 ResultSet r0 = p0.executeQuery();
+                int c3 = 0;
                 while (r0.next()) {
+                    c3++;
             %>
             <div class="col-lg-2 col-md-3 col-sm-4 col-6 mt-2">
                 <div>
@@ -76,6 +99,15 @@
                     </div>
                 </div>
             </div>
+            <%
+                }
+                if (c1 == 0) {
+            %>
+            <div class="col-lg-12 text-center my-5">
+                <h2 class="text-dark font-weight-bold mb-3">No Albums Found</h2>
+                <p class="text-muted">Sorry, we couldn’t find anything matching your search.<br>Try different keywords.</p>
+            </div>
+
             <%
                 }
             %>
